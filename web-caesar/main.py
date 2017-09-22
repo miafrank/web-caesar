@@ -16,14 +16,14 @@ form = """
 <html>
     <head>
         <style>
-            form {
+            form {{
                 background-color: #eee;
                 padding: 20px;
                 margin: 0 auto;
                 width: 540px;
                 font: 16px sans-serif;
                 border-radius: 10px;
-            }
+            }}
             textarea {{
                 margin: 10px 0;
                 width: 540px;
@@ -38,7 +38,7 @@ form = """
                     
                     <label for="rot">Rotate by:</label>
                     <input name="rot" value="0" type="text"/>
-                    <textarea type"text"{0} name="text"></textarea> 
+                    <textarea type"text" name="text">{0}</textarea> 
                     
                 <br>
                     <input type="submit">
@@ -57,7 +57,7 @@ form = """
 #about to be defined
 
 def index():
-    return form
+    return form.format('')
 
 @app.route("/", methods=['POST'])
 def encrypt():
@@ -66,7 +66,7 @@ def encrypt():
     encrypt_text = rotate_string(text=text, rot=rot)
 
     #encrypt_text = text.request(rotate_string)
-    return "<h1>" + encrypt_text + "</h1>"          
+    return form.format(encrypt_text)          
 #pass control to Flask object. Run function loops forever, 
 #put this last. Acts out respsonbilities as web server,
 #listens for requests and sending responses
